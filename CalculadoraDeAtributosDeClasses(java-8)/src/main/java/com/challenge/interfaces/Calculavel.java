@@ -1,15 +1,11 @@
 package com.challenge.interfaces;
 
-
 import java.math.BigDecimal;
-
 
 public interface Calculavel {
 
-    public BigDecimal somar(Object object);
-
-    public BigDecimal subtrair(Object object);
-
-    public BigDecimal totalizar(Object object);
+    public BigDecimal somar(Object obj);
+    public BigDecimal subtrair(Object obj);
+    public BigDecimal totalizar(Object obj);
 
 }
