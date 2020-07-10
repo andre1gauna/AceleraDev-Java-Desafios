@@ -2,8 +2,8 @@ package com.challenge.entity;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.io.Serializable;
+
 
 @Embeddable
 public class CadidateId implements Serializable {

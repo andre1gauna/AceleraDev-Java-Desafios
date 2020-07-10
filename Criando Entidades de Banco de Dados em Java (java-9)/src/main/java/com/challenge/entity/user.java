@@ -2,39 +2,54 @@ package com.challenge.entity;
 
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+
 public class user {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "full_name")
+    @NotNull
+    @Size(max = 100)
+    private String fullname;
 
     @NotNull
-    @Max(100)
-    private String full_name;
-
-    @NotNull
-    @Max(100)
+    @Column(name = "email")
+    @Size(max = 100)
+    @Email
     private String email;
 
     @NotNull
-    @Max(50)
+    @Size(max = 50)
     private String nickname;
 
     @NotNull
-    @Max(255)
+    @Size(max = 255)
     private String password;
 
     @CreatedDate
-    private Timestamp created_at;
+    @Column(name = "created_at")
+    private LocalDate created_at;
+
+    @OneToMany
+    private List<candidate> candidate;
+
+    @OneToMany
+    private List<submission> submission;
 
 }

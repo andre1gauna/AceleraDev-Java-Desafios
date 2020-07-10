@@ -2,31 +2,38 @@ package com.challenge.entity;
 
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+
 public class company {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private int id;
 
     @NotNull
-    @Max(100)
+    @Size(max = 100)
     private String name;
 
     @NotNull
-    @Max(50)
+    @Size(max = 50)
     private String slug;
 
     @CreatedDate
-    private Timestamp created_at;
+    @Column(name = "created_at")
+    private LocalDate created_at;
+
+    @OneToMany
+    private List<candidate> candidate;
 
 }
